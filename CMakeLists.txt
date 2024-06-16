@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.20)
 
 set(LIBRARY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/libraries/klangstrom-stm32")  # set application and library paths
-include(toolchain.cmake)                                                    # include toolchain before `project`
+include(${LIBRARY_PATH}/cmake/toolchain.cmake)                              # include `toolchain` before `project`
 project(klangstrom-stm32-standalone)                                        # set project name
 
-include(pre.cmake)
+include(${LIBRARY_PATH}/cmake/pre.cmake)
 
 # add executable
 
@@ -24,4 +24,4 @@ add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 add_subdirectory(${LIBRARY_PATH})
 target_link_libraries(${PROJECT_NAME} PRIVATE klangstrom-stm32)
 
-include(post.cmake)
+include(${LIBRARY_PATH}/cmake/post.cmake)
