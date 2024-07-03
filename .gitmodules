@@ -1,3 +1,9 @@
 [submodule "libraries/klangstrom-stm32"]
 	path = libraries/klangstrom-stm32
 	url = https://github.com/dennisppaul/klangstrom-stm32.git
+[submodule "libraries/klangstrom-libraries"]
+	path = libraries/klangstrom-libraries
+	url = https://github.com/dennisppaul/klangstrom-libraries.git
+[submodule "libraries/klangwellen"]
+	path = libraries/klangwellen
+	url = https://github.com/dennisppaul/klangwellen.git
