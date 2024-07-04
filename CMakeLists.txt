@@ -1,12 +1,12 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.29)
 
 set(KLST_STM32_LIBRARY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/libraries/klangstrom-stm32")   # set application and library paths
 set(KLST_LIBRARY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/libraries/klangstrom-libraries")
 include(${KLST_STM32_LIBRARY_PATH}/cmake/toolchain.cmake)                               # include `toolchain` before `project`
 project(klangstrom-stm32-standalone)                                                    # set project name
 set(KLST_ENV 0x36)                                                                      # set KLST environment
-                                                                                        #  0x36=KLST_PANDA_STM32
-                                                                                        #  0x37=KLST_CATERPILLAR_STM32
+                                                                                        #     0x36=KLST_PANDA_STM32
+                                                                                        #     0x37=KLST_CATERPILLAR_STM32
 
 # add pre
 
