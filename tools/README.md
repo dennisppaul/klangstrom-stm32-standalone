@@ -28,7 +28,7 @@ the following scripts are for development purposes only. they try to establish a
 
 - `KLST_PANDA-update_variant.sh` :: symlinks all files in the local `variant` folder into the *STM32duino* variant folder.
 - `‌link_libraries.sh` :: creates symlink for libraries specified in arduino library folder
-- `‌append-board-variant-definition.sh` :: appends board defintion from e.g from `./variants/KLST_PANDA/KLST_PANDA-boards.txt` ( included in `‌KLST_PANDA-update_variant.sh` )
+- `‌append-board-variant-definition.sh` :: appends board defintion from e.g from `../variants/KLST_PANDA/KLST_PANDA-boards.txt` ( included in `‌KLST_PANDA-update_variant.sh` )
 
 currently the following files are relevant for a variant:
 
