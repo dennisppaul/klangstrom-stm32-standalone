@@ -6,9 +6,11 @@
 
 after code has been generated with STM32CubeMX in `‌./libraries/klangstrom-stm32` the following scripts should be run:
 
-1. `‌klangstrom-stm32-format-generated.sh` :: format generated code
+1. `‌klangstrom-stm32-format-generated.sh` :: format generated code ( formatting of `ff.c` may take a while )
 2. `‌KLST_PANDA_STM32_CubeMX-compile_filelist.sh` :: compiles a list of generated files from `‌klangstrom-stm32`
 3. `‌KLST_PANDA_STM32_CubeMX-collect_files.sh` :: collect and copy files spec'd in the file list to `./libraries/klangstrom-libraries/Klangstrom_KLST_PANDA_STM32_CubeMX`
+
+alternatively `‌KLST_PANDA-update_library.sh` does all steps at once.
 
 `KLST_PANDA-directories.txt` contains a list of directories to be considered for `./libraries/klangstrom-libraries/Klangstrom_KLST_PANDA_STM32_CubeMX`
 
@@ -25,8 +27,8 @@ currently these are:
 the following scripts are for development purposes only. they try to establish a development workflow for *Arduino IDE* i.e symlinking libraries and hardware definitions into 
 
 - `KLST_PANDA-update_variant.sh` :: symlinks all files in the local `variant` folder into the *STM32duino* variant folder.
-- `‌link_libraries.sh` :: creates symlink for libraries specified in 
-- `‌./variants/KLST_PANDA/KLST_PANDA-boards.txt` :: may need to be appended to variant board definition
+- `‌link_libraries.sh` :: creates symlink for libraries specified in arduino library folder
+- `‌append-board-variant-definition.sh` :: appends board defintion from e.g from `./variants/KLST_PANDA/KLST_PANDA-boards.txt` ( included in `‌KLST_PANDA-update_variant.sh` )
 
 currently the following files are relevant for a variant:
 
