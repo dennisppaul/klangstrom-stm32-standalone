@@ -10,6 +10,8 @@ KLST_STM32_LIB_PATH=../libraries/klangstrom-stm32
     $KLST_STM32_LIB_PATH \
     $KLST_CUBEMX_LIB_PATH/src
 
+sed -i '' 's|#include "../ff.h"|#include "ff.h"|' $KLST_CUBEMX_LIB_PATH/src/syscall.c # dumb hack to fix import
+
 # should be formated already
 # ./clang-format-folder.sh \
 #     $KLST_CUBEMX_LIB_PATH/src \
