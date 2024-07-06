@@ -12,7 +12,7 @@ if [ "$#" -ne 1 ]; then
 fi
 
 # Assign command line arguments to variables
-destination_dir=$2
+destination_dir=$1
 
 # Check if destination directory exists
 if [ ! -d "$destination_dir" ]; then

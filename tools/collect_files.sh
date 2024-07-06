@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 #
-# e.g collect_variant_files.sh $HOME/Documents/dennisppaul/projects/klangstrom/git/klangstrom-hardware/KLST_PANDA/firmware/KLST_PANDA-variant-files.txt $HOME/Documents/dennisppaul/projects/klangstrom/git/klangstrom-hardware/KLST_PANDA/firmware $HOME/Documents/dennisppaul/projects/klangstrom/git/klangstrom-hardware/KLST_PANDA/variant
+# e.g collect_files.sh $HOME/Documents/dennisppaul/projects/klangstrom/git/klangstrom-hardware/KLST_PANDA/firmware/KLST_PANDA-variant-files.txt $HOME/Documents/dennisppaul/projects/klangstrom/git/klangstrom-hardware/KLST_PANDA/firmware $HOME/Documents/dennisppaul/projects/klangstrom/git/klangstrom-hardware/KLST_PANDA/variant
 #
 
 # Check if correct number of arguments is passed
@@ -29,9 +29,14 @@ fi
 
 # Check if destination directory exists
 if [ ! -d "$destination_dir" ]; then
-    echo "Error: Destination directory '$destination_dir' does not exist."
-    exit 1
+    echo "destination directory '$destination_dir' does not exist."
+else
+    echo "destination directory '$destination_dir' does exist. erasing it."
+    rm -r $destination_dir
 fi
+
+echo "creating destination directory '$destination_dir'"
+mkdir -p "$destination_dir"
 
 # Copy files from source to destination as per the list
 while IFS= read -r file; do

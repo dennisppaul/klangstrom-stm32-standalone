@@ -1,24 +1,34 @@
 # klangstrom-stm32-standalone / tools
 
-@note(`klangstrom-stm32` currently only works for `KLST_PANDA`) 
-
 ## Klangstrom_KLST_PANDA_STM32_CubeMX
 
-copy generated files from `./libraries/klangstrom-stm32/` 
+@updated(2024-07-06)
+
+after code has been generated with STM32CubeMX in `‌./libraries/klangstrom-stm32` the following scripts should be run:
+
+1. `‌klangstrom-stm32-format-generated.sh` :: format generated code
+2. `‌KLST_PANDA_STM32_CubeMX-compile_filelist.sh` :: compiles a list of generated files from `‌klangstrom-stm32`
+3. `‌KLST_PANDA_STM32_CubeMX-collect_files.sh` :: collect and copy files spec'd in the file list to `./libraries/klangstrom-libraries/Klangstrom_KLST_PANDA_STM32_CubeMX`
+
+`KLST_PANDA-directories.txt` contains a list of directories to be considered for `./libraries/klangstrom-libraries/Klangstrom_KLST_PANDA_STM32_CubeMX`
+
+currently these are:
 
 - `./libraries/klangstrom-stm32/Core/Inc`
 - `./libraries/klangstrom-stm32/Core/Src` ( except `‌system_stm32h7xx.c` )
 - `./libraries/klangstrom-stm32/FATFS/App`
 - `./libraries/klangstrom-stm32/FATFS/Target`
 - `./libraries/klangstrom-stm32/Middlewares/Third_Party/FatFs/src`
-- `./libraries/klangstrom-stm32/STM32H723ZGTX_FLASH.ld`
-- `‌./libraries/klangstrom-libraries/Klangstrom/src/KlangstromEnvironment.h`
 
-to `./libraries/klangstrom-libraries/Klangstrom_KLST_PANDA_STM32_CubeMX/src`
+## Variant
 
-## variant
+the following scripts are for development purposes only. they try to establish a development workflow for *Arduino IDE* i.e symlinking libraries and hardware definitions into 
 
-add the following files to `variant` folder:
+- `KLST_PANDA-update_variant.sh` :: symlinks all files in the local `variant` folder into the *STM32duino* variant folder.
+- `‌link_libraries.sh` :: creates symlink for libraries specified in 
+- `‌./variants/KLST_PANDA/KLST_PANDA-boards.txt` :: may need to be appended to variant board definition
+
+currently the following files are relevant for a variant:
 
 ```
 PeripheralPins_KLST_PANDA.c
@@ -27,8 +37,4 @@ variant_KLST_PANDA.cpp
 variant_KLST_PANDA.h
 ```
 
-copy file `./libraries/klangstrom-stm32/STM32H723ZGTX_FLASH.ld` to `variant` folder.
-
-copy file `‌KlangstromEnvironment.h` to `variant` folder.
-
-append `./variants/KLST_PANDA/KLST_PANDA-boards.txt` to `board.txt` file in `$HOME/Library/Arduino15/packages/STMicroelectronics/hardware/stm32/2.8.0/boards.txt`
+note, that the source files rely on `ARDUINO_KLST_PANDA` being defined.

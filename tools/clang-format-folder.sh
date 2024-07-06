@@ -16,7 +16,10 @@ format_files() {
         exit 1
     fi
 
-    find "$DIR" -type f \( -name '*.c' -o -name '*.cpp' -o -name '*.h' -o -name '*.hpp' \) -exec clang-format -i -style=file -assume-filename="$CONFIG_FILE" {} \;
+    find "$DIR" -type f \( -name '*.c' -o -name '*.cpp' -o -name '*.h' -o -name '*.hpp' \) | while read -r FILE; do
+        echo "Formatting $FILE"
+        clang-format -i -style=file -assume-filename="$CONFIG_FILE" "$FILE"
+    done
 }
 
 # Check if the correct number of arguments is provided

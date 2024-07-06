@@ -1,0 +1,3 @@
+Core
+FATFS
+Middlewares/Third_Party/FatFs
