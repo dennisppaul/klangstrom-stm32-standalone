@@ -37,4 +37,4 @@ variant_KLST_PANDA.cpp
 variant_KLST_PANDA.h
 ```
 
-note, that the source files rely on `ARDUINO_KLST_PANDA` being defined.
+note, that the source files rely on `ARDUINO_KLST_PANDA` being defined. `STM32H723ZGTX_FLASH.ld` may be copied from `‌./libraries/klangstrom-stm32`. 

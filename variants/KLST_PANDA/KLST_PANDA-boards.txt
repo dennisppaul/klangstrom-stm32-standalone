@@ -1,3 +1,4 @@
+
 ################################################################################
 # Klangstrom KLST_PANDA ( STM32H723ZGT )
 KLST_PANDA.name=Klangstrom KLST_PANDA (STM32H723ZGT)
@@ -100,3 +101,4 @@ KLST_PANDA.menu.rtlib.nanofps.build.flags.ldspecs=--specs=nano.specs -u _printf_
 KLST_PANDA.menu.rtlib.full=Newlib Standard
 KLST_PANDA.menu.rtlib.full.build.flags.ldspecs=
 
+# @included(KLST_PANDA)
