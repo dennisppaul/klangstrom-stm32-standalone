@@ -29,8 +29,9 @@ if [ ! -d "$destination_dir" ]; then
     exit 1
 fi
 
-# Remove old symbolic links in the destination directory
-find "$destination_dir" -type l -exec rm {} \;
+# moved to extra script
+# # Remove old symbolic links in the destination directory
+# find "$destination_dir" -type l -exec rm {} \;
 
 # Create new symbolic links from the source directory to the destination directory
 for file in "$source_dir"/*; do
