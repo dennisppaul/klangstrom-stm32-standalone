@@ -23,29 +23,32 @@ include_directories(
         "${CMAKE_CURRENT_SOURCE_DIR}/src"
 )
 
-# add klangstrom-stm32
+# add klangstrom-stm32, klangstrom, Klangstrom_KLST_PANDA_STM32
 
+add_subdirectory(${KLST_STM32_LIBRARY_PATH})
 add_subdirectory(${KLST_LIBRARY_PATH}/Klangstrom)
 add_subdirectory(${KLST_LIBRARY_PATH}/Klangstrom_KLST_PANDA_STM32)
-add_subdirectory(${KLST_STM32_LIBRARY_PATH})
 
-# propagate include directories and compile definitions from klangstrom-stm32 + Klangstrom_KLST_PANDA_STM32 to klangstrom and vice versa
+# propagate KLST_ENV
 
 target_compile_definitions(klangstrom PUBLIC KLST_ENV=${KLST_ENV})
 target_compile_definitions(klangstrom-stm32 PUBLIC KLST_ENV=${KLST_ENV})
 target_compile_definitions(Klangstrom_KLST_PANDA_STM32 PUBLIC KLST_ENV=${KLST_ENV})
 
+# propagate include directories
+
 get_target_property(KLANGSTROM_INCLUDE_DIRS klangstrom INTERFACE_INCLUDE_DIRECTORIES) # for `KlangstromEnvironment.h`
+get_target_property(KLANGSTROM_STM32_INCLUDE_DIRS klangstrom-stm32 INTERFACE_INCLUDE_DIRECTORIES)
+get_target_property(KLANGSTROM_KLST_PANDA_STM32_INCLUDE_DIRS Klangstrom_KLST_PANDA_STM32 INTERFACE_INCLUDE_DIRECTORIES)
+target_include_directories(klangstrom PUBLIC ${KLANGSTROM_STM32_INCLUDE_DIRS})
+target_include_directories(klangstrom PUBLIC ${KLANGSTROM_KLST_PANDA_STM32_INCLUDE_DIRS})
 target_include_directories(klangstrom-stm32 PUBLIC ${KLANGSTROM_INCLUDE_DIRS})
 
-get_target_property(KLANGSTROM_STM32_INCLUDE_DIRS klangstrom-stm32 INTERFACE_INCLUDE_DIRECTORIES)
-target_include_directories(klangstrom PUBLIC ${KLANGSTROM_STM32_INCLUDE_DIRS})
+# propagate compile definitions
 
 get_target_property(KLANGSTROM_STM32_COMPILE_DEFINITIONS klangstrom-stm32 INTERFACE_COMPILE_DEFINITIONS)
 target_compile_definitions(klangstrom PUBLIC ${KLANGSTROM_STM32_COMPILE_DEFINITIONS})
-
-get_target_property(KLANGSTROM_KLST_PANDA_STM32_INCLUDE_DIRS Klangstrom_KLST_PANDA_STM32 INTERFACE_INCLUDE_DIRECTORIES)
-target_include_directories(klangstrom PUBLIC ${KLANGSTROM_KLST_PANDA_STM32_INCLUDE_DIRS})
+target_compile_definitions(Klangstrom_KLST_PANDA_STM32 PUBLIC ${KLANGSTROM_STM32_COMPILE_DEFINITIONS})
 
 # add executable
 

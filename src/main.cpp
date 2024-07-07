@@ -103,10 +103,10 @@ int main() {
   // MX_SPI4_Init();
   /* USER CODE BEGIN 2 */
   MX_USART3_UART_Init();
-  const char *data = "EOF\r\n";
-  _write(0, (char *)data, 5);
-  HAL_UART_Transmit(&huart3, (uint8_t *)data, 5, 10);
-  printf("INIT\r\n");
+  const char *data = "eof\r\n";
+//  _write(0, (char *)data, 5);
+//  HAL_UART_Transmit(&huart3, (uint8_t *)data, 5, 10);
+  printf("init\r\n");
 
   std::vector<int> v;
   v.push_back(1);
@@ -138,11 +138,11 @@ int main() {
     // MX_USB_HOST_Process();
 
     /* USER CODE BEGIN 3 */
-    HAL_GPIO_TogglePin(_LED_00_GPIO_Port, _LED_00_Pin);
-    HAL_GPIO_TogglePin(_LED_01_GPIO_Port, _LED_01_Pin);
-    setbuf(stdout, 0);
-    printf(".\r\n");
-    HAL_UART_Transmit(&huart3, (uint8_t *)data, 5, 10);
+//    HAL_GPIO_TogglePin(_LED_00_GPIO_Port, _LED_00_Pin);
+//    HAL_GPIO_TogglePin(_LED_01_GPIO_Port, _LED_01_Pin);
+////    setbuf(stdout, 0);
+//    printf(".\r\n");
+//    HAL_UART_Transmit(&huart3, (uint8_t *)data, 5, 10);
     HAL_Delay(100);
   }
   /* USER CODE END 3 */
