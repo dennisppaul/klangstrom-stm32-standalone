@@ -53,7 +53,12 @@ target_compile_definitions(Klangstrom_KLST_PANDA_STM32 PUBLIC ${KLANGSTROM_STM32
 # add executable
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} PRIVATE klangstrom-stm32 klangstrom Klangstrom_KLST_PANDA_STM32)
+target_compile_definitions(${PROJECT_NAME} PRIVATE ${KLANGSTROM_STM32_COMPILE_DEFINITIONS})
+target_link_libraries(${PROJECT_NAME} PRIVATE
+        klangstrom
+        Klangstrom_KLST_PANDA_STM32
+        klangstrom-stm32
+)
 
 # add post
 
