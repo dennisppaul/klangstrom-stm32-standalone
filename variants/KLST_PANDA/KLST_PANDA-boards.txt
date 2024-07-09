@@ -6,7 +6,7 @@ KLST_PANDA.name=Klangstrom KLST_PANDA (STM32H723ZGT)
 KLST_PANDA.build.core=arduino
 KLST_PANDA.build.board=Klangstrom KLST_PANDA
 KLST_PANDA.build.st_extra_flags=-DCORE_CM7 -D{build.product_line} {build.enable_usb} {build.xSerial} -DKLST_ENV=0x36
-KLST_PANDA.build.fpu=-mfpu=fpv4-sp-d16
+KLST_PANDA.build.fpu=-mfpu=fpv5-d16
 KLST_PANDA.build.float-abi=-mfloat-abi=hard
 KLST_PANDA.build.series=STM32H7xx
 KLST_PANDA.build.mcu=cortex-m7
