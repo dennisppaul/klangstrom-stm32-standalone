@@ -119,10 +119,12 @@ void event(int event_type, uint8_t event_data) {
 //void WEAK encoder_event() {}
 
 void audioblock(AudioBlock* audio_block) {
-    for (int i = 0; i < audio_block->block_size; ++i) {
-        audio_block->output[0][i] = oscillator.process();
-        for (int j = 1; j < audio_block->output_channels; ++j) {
-            audio_block->output[j][i] = audio_block->output[0][i];
+    if (audio_block->device_id == 0) {
+        for (int i = 0; i < audio_block->block_size; ++i) {
+            float mSample = oscillator.process();
+            for (int j = 0; j < audio_block->output_channels; ++j) {
+                audio_block->output[0][i] = mSample;
+            }
         }
     }
 }
