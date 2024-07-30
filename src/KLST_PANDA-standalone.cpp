@@ -12,20 +12,20 @@
 #include "KlangstromSDCard.h"
 #include "Wavetable.h"
 
-Klangstrom klangstrom;
-AudioCodec audiocodec;
+Klangstrom  klangstrom;
+AudioCodec  audiocodec;
 SerialDebug console;
-LEDs leds;
-SDCard sdcard;
+LEDs        leds;
+SDCard      sdcard;
 
-float *wavetable = new float[512];
-Wavetable oscillator { wavetable, 512, 48000 };
+float*    wavetable = new float[512];
+Wavetable oscillator{wavetable, 512, 48000};
 
-int mFrequency = 27.5;
+float mFrequency = 27.5f;
 float mIntensity = 0.0f;
 
-static const char text[] = "Klangstrom (KLST) is an infrastructure to facilitate generative, networked, embedded sound + music + composition."; /* File write buffer */
-static const uint32_t length = strlen((char*) text);
+static const char     text[]      = "Klangstrom (KLST) is an infrastructure to facilitate generative, networked, embedded sound + music + composition."; /* File write buffer */
+static const uint32_t text_length = strlen((char*) text);
 
 void setup() {
     /* init section */
@@ -36,7 +36,7 @@ void setup() {
     console.info();
     console.timestamp();
     console.println("starting init");
-    audiocodec.init();
+    audiocodec.init(48000, 2, 2, 128, 16, AUDIO_DEVICE_KLST_PANDA_AUDIO_CODEC);
     leds.init();
     sdcard.init();
 
@@ -61,14 +61,14 @@ void setup() {
 
     console.timestamp();
     sdcard.open_file("KLST.TXT", SDCard::WRITE | SDCard::CREATE_ALWAYS);
-    sdcard.write((uint8_t*) text, length);
+    sdcard.write((uint8_t*) text, text_length);
     sdcard.close_file();
 
     console.timestamp();
     sdcard.open_file("KLST.TXT", SDCard::READ);
-    uint8_t bytes_read_buffer[length];
-    sdcard.read(bytes_read_buffer, length);
-    for (uint32_t i = 0; i < length; ++i) {
+    uint8_t bytes_read_buffer[text_length];
+    sdcard.read(bytes_read_buffer, text_length);
+    for (uint32_t i = 0; i < text_length; ++i) {
         console.print("%c", bytes_read_buffer[i]);
     }
     console.println("");
@@ -85,7 +85,7 @@ void loop() {
     klangstrom.loop();
     mFrequency *= 2;
     if (mFrequency > 440) {
-        mFrequency = 27.5;
+        mFrequency = 27.5f;
     }
     oscillator.set_frequency(mFrequency);
 
@@ -103,8 +103,8 @@ void loop() {
     if (sdcard.detected()) {
         sdcard.mount();
         sdcard.open_file("KLST.TXT", SDCard::READ);
-        uint8_t bytes_read_buffer[length];
-        sdcard.read(bytes_read_buffer, length);
+        uint8_t bytes_read_buffer[text_length];
+        sdcard.read(bytes_read_buffer, text_length);
         sdcard.close_file();
         sdcard.unmount();
     }
@@ -118,10 +118,12 @@ void event(int event_type, uint8_t event_data) {
 //void WEAK event(int event_type, uint8_t event_data) {}
 //void WEAK encoder_event() {}
 
-void audioblock(float **input_signal, float **output_signal, uint16_t length) {
-    for (int i = 0; i < length; ++i) {
-        output_signal[0][i] = oscillator.process();
-        output_signal[1][i] = output_signal[0][i];
+void audioblock(AudioBlock* audio_block) {
+    for (int i = 0; i < audio_block->block_size; ++i) {
+        audio_block->output[0][i] = oscillator.process();
+        for (int j = 1; j < audio_block->output_channels; ++j) {
+            audio_block->output[j][i] = audio_block->output[0][i];
+        }
     }
 }
 
