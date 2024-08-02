@@ -2,6 +2,8 @@
 
 #ifdef KLST_PANDA_STM32
 
+#include "ArrayList.h"
+
 #include "ApplicationStub.h" // this is important for C++
 
 #include "Klangstrom.h"
@@ -12,11 +14,15 @@
 #include "KlangstromSDCard.h"
 #include "Wavetable.h"
 
+#include "AudioCodec.h"
+
 Klangstrom  klangstrom;
 AudioCodec  audiocodec;
 SerialDebug console;
 LEDs        leds;
 SDCard      sdcard;
+
+AudioDevice* audiodevice;
 
 float*    wavetable = new float[512];
 Wavetable oscillator{wavetable, 512, 48000};
@@ -36,7 +42,11 @@ void setup() {
     console.info();
     console.timestamp();
     console.println("starting init");
+
     audiocodec.init(48000, 2, 2, 128, 16, AUDIO_DEVICE_KLST_PANDA_AUDIO_CODEC);
+    AudioInfo audioinfo;
+    audiodevice = audiocodec_init(&audioinfo);
+
     leds.init();
     sdcard.init();
 
@@ -112,9 +122,7 @@ void loop() {
     delay(2000);
 }
 
-void event(int event_type, uint8_t event_data) {
-}
-
+//void event(int event_type, uint8_t event_data) {}
 //void WEAK event(int event_type, uint8_t event_data) {}
 //void WEAK encoder_event() {}
 
