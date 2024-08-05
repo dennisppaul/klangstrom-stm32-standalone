@@ -5,8 +5,8 @@
 #include "ApplicationStub.h"
 
 int getentropy(void* buffer, size_t length) {
-    buffer = buffer;
-    length = length;
+    (void) buffer;
+    (void) length;
     return -ENOSYS;
 }
 
