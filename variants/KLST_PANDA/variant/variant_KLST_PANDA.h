@@ -252,7 +252,7 @@
 // HSE default value is 25MHz in HAL
 // By default HSE_BYPASS is based on HSI/2 from STLink
 #ifndef HSE_BYPASS_NOT_USED
-  #define HSE_VALUE             8000000
+  #define HSE_VALUE             16000000
 #endif
 
 // Extra HAL modules
