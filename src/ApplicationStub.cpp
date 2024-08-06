@@ -12,9 +12,12 @@ int getentropy(void* buffer, size_t length) {
 
 int main(void) {
     setup();
+#pragma clang diagnostic push
+#pragma ide diagnostic ignored "EndlessLoop"
     while (1) {
         loop();
     }
+#pragma clang diagnostic pop
 }
 
 #include "KlangstromEnvironment.h"

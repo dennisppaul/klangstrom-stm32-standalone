@@ -7,12 +7,26 @@ project(klangstrom-stm32-standalone)                                            
 set(KLST_ENV 0x36)                                                                      # set KLST environment
                                                                                         #     0x36=KLST_PANDA_STM32
                                                                                         #     0x37=KLST_CATERPILLAR_STM32
+set(SKETCH_FILES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/libraries/klangstrom-libraries/Klangstrom/examples/SDCard") # for development purposes
 
 # add pre
 
 include(${KLST_STM32_LIBRARY_PATH}/cmake/pre.cmake)
 
 # add executable
+
+include_directories("${SKETCH_FILES_DIR}")
+file(GLOB SKETCH_SOURCE_FILES
+        "${SKETCH_FILES_DIR}/*.c"
+        "${SKETCH_FILES_DIR}/*.cpp"
+        "${SKETCH_FILES_DIR}/*.ino"
+)
+set_source_files_properties(${SKETCH_SOURCE_FILES} PROPERTIES LANGUAGE CXX)
+foreach(ino_file ${SKETCH_SOURCE_FILES})
+    if (ino_file MATCHES "\\.ino$")
+        set_source_files_properties(${SKETCH_SOURCE_FILES} PROPERTIES COMPILE_FLAGS "-x c++")
+    endif()
+endforeach()
 
 file(GLOB SOURCE_FILES
         "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c"
@@ -52,7 +66,7 @@ target_compile_definitions(Klangstrom_KLST_PANDA_STM32 PUBLIC ${KLANGSTROM_STM32
 
 # add executable
 
-add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${SKETCH_SOURCE_FILES})
 target_compile_definitions(${PROJECT_NAME} PRIVATE ${KLANGSTROM_STM32_COMPILE_DEFINITIONS})
 target_link_libraries(${PROJECT_NAME} PRIVATE
         klangstrom
