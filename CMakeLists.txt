@@ -7,7 +7,7 @@ project(klangstrom-stm32-standalone)                                            
 set(KLST_ENV 0x36)                                                                      # set KLST environment
                                                                                         #     0x36=KLST_PANDA_STM32
                                                                                         #     0x37=KLST_CATERPILLAR_STM32
-set(SKETCH_FILES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/libraries/klangstrom-libraries/Klangstrom/examples/SDCard") # for development purposes
+set(SKETCH_FILES_DIR "${CMAKE_CURRENT_SOURCE_DIR}/libraries/klangstrom-libraries/Klangstrom/examples/SDCardAudioStream") # for development purposes
 
 # add pre
 
